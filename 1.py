@@ -1,11 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-import sklearn
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
 import pandas as pd
 
 data=pd.read_csv('challenger.csv')
-data['win'].plot(kind='hist',bins=50,figsize=(12,6))
-Label = data['win']#La listes des wins
-data.drop(data.columns[0:19], axis=1, inplace=True)#La liste des donnees qu'on va utlisee
-print(Label)
+
+inputs = data.drop(['win','vilemaw_kills_team_1', 'vilemaw_kills_team_2'],axis='columns')
+target = data["win"]
+
+i_train,i_test,t_train,t_test=train_test_split(inputs[:100],target[:100],test_size=0.33)
+
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+
+print(DTree.score(i_test,t_test))
