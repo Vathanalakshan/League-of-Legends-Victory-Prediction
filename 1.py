@@ -4,6 +4,7 @@ import matplotlib.cm as cm
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 import pandas as pd
+import matplotlib.pyplot as plt
 
 data=pd.read_csv('challenger.csv')
 
