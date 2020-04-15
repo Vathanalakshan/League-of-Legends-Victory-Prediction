@@ -8,12 +8,41 @@ import matplotlib.pyplot as plt
 
 data=pd.read_csv('challenger.csv')
 
-inputs = data.drop(['win','vilemaw_kills_team_1', 'vilemaw_kills_team_2'],axis='columns')
+inputs = data.drop(data.columns[0:19],axis='columns')
 target = data["win"]
 
-i_train,i_test,t_train,t_test=train_test_split(inputs[:100],target[:100],test_size=0.33)
-
+i_train,i_test,t_train,t_test=train_test_split(inputs[:100],target[:100],test_size=0.2)
 DTree= DecisionTreeClassifier()
 DTree.fit(i_train,t_train)
+print("100")
+print(DTree.score(i_test,t_test))
 
+i_train,i_test,t_train,t_test=train_test_split(inputs[:200],target[:200],test_size=0.2)
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+print("200")
+print(DTree.score(i_test,t_test))
+
+i_train,i_test,t_train,t_test=train_test_split(inputs[:300],target[:300],test_size=0.2)
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+print("300")
+print(DTree.score(i_test,t_test))
+
+i_train,i_test,t_train,t_test=train_test_split(inputs[:400],target[:400],test_size=0.2)
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+print("400")
+print(DTree.score(i_test,t_test))
+
+i_train,i_test,t_train,t_test=train_test_split(inputs[:500],target[:500],test_size=0.2)
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+print("500")
+print(DTree.score(i_test,t_test))
+
+i_train,i_test,t_train,t_test=train_test_split(inputs[:600],target[:600],test_size=0.2)
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+print("600")
 print(DTree.score(i_test,t_test))
