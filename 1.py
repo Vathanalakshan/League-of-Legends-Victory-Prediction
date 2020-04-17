@@ -7,22 +7,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 
-data=pd.read_csv('specific-challenger')
-data.drop_duplicates()
+data=pd.read_csv('challenger.csv')
+print(data.shape)
 
-kill=["kills_bottom_duo_carry_team_2","kills_bottom_duo_carry_team_1","kills_top_team_1","kills_top_team_2","kills_middle_team_1","kills_middle_team_2",]
+data=data.drop_duplicates()
+
+print(data.shape)
+kill=["kills_bottom_duo_support_team_2","kills_bottom_duo_support_team_1","kills_bottom_duo_carry_team_2","kills_bottom_duo_carry_team_1","kills_top_team_1","kills_top_team_2","kills_middle_team_1","kills_middle_team_2","kills_jungle_team_1","kills_jungle_team_2"]
+k=[]
 for i, row in data.iterrows():
     for j in kill:
         if (row[j] > 40):
-            print(i)
+            k.append(i)
             break
 
-print(data)
+data=data.drop(k,axis=0)
+print(data.shape)
 
-for i in data:
-    sns.lmplot(i, hue="win", height=3)
-    plt.show()
 
+sns.distplot(data["gold_earned_20m_top_team_2"])
+plt.show()
 """
 inputs = data.drop(data.columns[0:19],axis='columns')
 target = data["win"]
@@ -32,6 +36,4 @@ DTree= DecisionTreeClassifier()
 DTree.fit(i_train,t_train)
 print("100")
 print(DTree.score(i_test,t_test))
-
-
 """
