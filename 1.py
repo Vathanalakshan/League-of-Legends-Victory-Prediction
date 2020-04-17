@@ -27,6 +27,8 @@ print(data.shape)
 
 sns.distplot(data["gold_earned_20m_top_team_2"])
 plt.show()
+
+sns.pairplot(data,vars=kill)
 """
 inputs = data.drop(data.columns[0:19],axis='columns')
 target = data["win"]
