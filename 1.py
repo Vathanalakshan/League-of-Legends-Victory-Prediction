@@ -27,28 +27,21 @@ for i, row in data.iterrows():
 
 data = data.drop(k, axis=0)
 print(data.shape)
-kill1 = ["kills_top_team_1", "kills_jungle_team_1", "kills_middle_team_1", "kills_bottom_duo_carry_team_1",
-         "kills_bottom_duo_support_team_1"]
-kill2 = ["kills_top_team_2", "kills_jungle_team_2", "kills_middle_team_2", "kills_bottom_duo_carry_team_2",
-         "kills_bottom_duo_support_team_2"]
+gold_earned1=["gold_earned_top_team_1","gold_earned_jungle_team_1","gold_earned_middle_team_1","gold_earned_bottom_duo_carry_team_1","gold_earned_bottom_duo_support_team_1"]
+gold_earned2=["gold_earned_top_team_2","gold_earned_jungle_team_2","gold_earned_middle_team_2","gold_earned_bottom_duo_carry_team_2","gold_earned_bottom_duo_support_team_2"]
 
 
-def meanplotter(d, a):
-    mean = {}
-    for y in d:
-        if y in a:
-            mean[y] = (d[y].mean(axis=0))
-    print(mean)
+input = data.drop(data.iloc[:, : 50]
 
-    keys=mean.keys()
-    vals=mean.values()
+,axis='columns')
+target = data["win"]
 
-    plt.bar(keys, np.divide(list(vals), sum(vals)), label="Real distribution")
-    plt.tight_layout()
+i_train,i_test,t_train,t_test=train_test_split(input,target,test_size=0.2)
 
-    plt.show()
+DTree= DecisionTreeClassifier()
+DTree.fit(i_train,t_train)
+print(DTree.score(i_test,t_test))
 
 
-meanplotter(data,kill1)
-
-meanplotter(data,kill2)
+sns.heatmap(data.corr(), annot=True)
+plt.show()
